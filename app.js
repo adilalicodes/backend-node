@@ -15,7 +15,9 @@ const app = express();
 // (for rate limiting) work.
 if (config.isProduction) app.set('trust proxy', 1);
 
-app.use(cors({ origin: config.allowedOrigins, credentials: true }));
+console.log(config.allowedOrigins), "allowed origins";
+// app.use(cors({ origin: config.allowedOrigins, credentials: true }));
+app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json({ limit: '10kb' }));
 
 fs.mkdirSync(config.sessionsDir, { recursive: true, mode: 0o700 });
