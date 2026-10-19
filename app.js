@@ -15,19 +15,15 @@ const app = express();
 // (for rate limiting) work.
 if (config.isProduction) app.set('trust proxy', 1);
 
-console.log(config.allowedOrigins), "allowed origins";
 // app.use(cors({ origin: config.allowedOrigins, credentials: true }));
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://super-toffee-1b3f77.netlify.app/",
-];
+const corsOptions = {
+  origin: "https://super-toffee-1b3f77.netlify.app",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
+app.use(cors(corsOptions));
 app.use(express.json({ limit: '10kb' }));
 
 fs.mkdirSync(config.sessionsDir, { recursive: true, mode: 0o700 });
