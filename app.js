@@ -11,19 +11,18 @@ const authRoutes = require('./src/modules/auth/auth.routes');
 
 const app = express();
 
-// Render terminates TLS at a proxy; trust it so secure cookies and client IPs ff
+// Render terminates TLS at a proxy; trust it so secure cookies and client IPs
 // (for rate limiting) work.
 if (config.isProduction) app.set('trust proxy', 1);
 
-// app.use(cors({ origin: config.allowedOrigins, credentials: true }));
-const corsOptions = {
-  origin: "https://super-toffee-1b3f77.netlify.app",
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: config.allowedOrigins,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }),
+);
 app.use(express.json({ limit: '10kb' }));
 
 fs.mkdirSync(config.sessionsDir, { recursive: true, mode: 0o700 });
