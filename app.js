@@ -11,7 +11,7 @@ const authRoutes = require('./src/modules/auth/auth.routes');
 
 const app = express();
 
-// Render terminates TLS at a proxy; trust it so secure cookies and client IPs
+// Render terminates TLS at a proxy; trust it so secure cookies and client IPs ff
 // (for rate limiting) work.
 if (config.isProduction) app.set('trust proxy', 1);
 
