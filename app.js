@@ -17,7 +17,17 @@ if (config.isProduction) app.set('trust proxy', 1);
 
 console.log(config.allowedOrigins), "allowed origins";
 // app.use(cors({ origin: config.allowedOrigins, credentials: true }));
-app.use(cors({ origin: '*', credentials: true }));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://super-toffee-1b3f77.netlify.app/",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: '10kb' }));
 
 fs.mkdirSync(config.sessionsDir, { recursive: true, mode: 0o700 });
