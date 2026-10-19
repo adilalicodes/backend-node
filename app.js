@@ -3,11 +3,11 @@ const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
-const config = require('./config');
-const originCheck = require('./middleware/originCheck');
-const notFound = require('./middleware/notFound');
-const errorHandler = require('./middleware/errorHandler');
-const authRoutes = require('./modules/auth/auth.routes');
+const config = require('./src/config');
+const originCheck = require('./src/middleware/originCheck');
+const notFound = require('./src/middleware/notFound');
+const errorHandler = require('./src/middleware/errorHandler');
+const authRoutes = require('./src/modules/auth/auth.routes');
 
 const app = express();
 
